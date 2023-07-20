@@ -1,0 +1,129 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+  {% if all_borrowed_books or no_borrowed_books %}
+  All Borrowed Books
+  {% else %}
+  Your Wishlist
+  {% endif %}
+
+{% endblock title %}
+
+{% block style %}
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, skyblue, red,  purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+            color: #127;
+            font-style: italic;
+        }
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  {% if all_borrowed_books or no_borrowed_books %}
+  <h1 class="text-center gradient-text">Your Borrowed Books</h1>
+  {% else %}
+  <h1 class="text-center gradient-text">Your Wishlist</h1>
+  {% endif %}
+
+
+</div>
+
+{% if all_borrowed_books %}
+
+{% for book in all_borrowed_books %}
+   
+        <hr>
+        <br>
+        <div class="book-box">
+            <div class="book-image">
+                <img src="{{ book.book_image_url }}" alt="Book Image" style="max-width: 250px;">
+            </div>
+            <div class="book-details">
+                <br>
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre.name }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <div class="book-actions">
+                    <div class="button-group">
+                        <a href=" {% url 'check_book_return_date' book.id %} " class="btn btn-info ">Check Due Date</a> &nbsp;&nbsp;&nbsp;  
+                        <a href=" {% url 'return_book' book.id %} " class="btn btn-warning ">Return Book</a> &nbsp;&nbsp;&nbsp;  
+                
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+{% endfor %}
+
+{% elif no_borrowed_books %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Not Borrowed Any Books Yet. <br>To Borrow Books, Go To All Books or Search Any Book in Searchbar.</h3>
+{% endif %}
+
+
+{% if wishlist %}
+
+{% for book in wishlist %}
+   
+        <hr>
+        <br>
+        <div class="book-box">
+            <div class="book-image">
+                <img src="{{ book.book_image_url }}" alt="Book Image" style="max-width: 250px;">
+            </div>
+            <div class="book-details">
+                <br>
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre.name }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <div class="book-actions">
+                    <div class="button-group">
+                        <a href=" {% url 'remove_from_wishlist' book.id %} " class="btn btn-danger ">Remove</a> &nbsp;&nbsp;&nbsp;  
+                
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+{% endfor %}
+{% elif not no_borrowed_books and not all_borrowed_books %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Not Added Any Books To Your Wishlist.<br> To Add Books To Your Wishlist, Go To All Books.</h3>
+
+{% endif %}
+
+{% endblock content %}
+
+
+

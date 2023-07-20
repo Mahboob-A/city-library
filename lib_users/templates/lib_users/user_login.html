@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block style %}
+
+.login-form {
+max-width: 400px;
+width: 100%;
+padding: 30px;
+border: 1px solid #ccc;
+border-radius: 10px;
+background-color: #fff;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+margin: 0 auto;
+}
+
+.login-title {
+font-size: 24px;
+text-align: center;
+margin-bottom: 30px;
+color: #7e57c2;
+background: linear-gradient(to right, #7e57c2, #1de9b6);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.form-group input {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.submit-button {
+display: block;
+width: 100%;
+padding: 10px;
+background-color: #7e57c2;
+border: none;
+border-radius: 5px;
+color: #fff;
+font-weight: bold;
+cursor: pointer;
+}
+
+.submit-button:hover {
+background-color: #1de9b6;
+}
+
+{% endblock style %}
+
+{% block content %}
+<br>
+<br>
+<div class="login-form">
+  <h2 class="login-title">Login</h2>
+
+{% if messages %} <!--  for log out -->
+{% for message in messages %}
+  <div class="alert alert-danger">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+{% if error %}
+  <div class="alert alert-danger">
+    {{ error }}
+  </div>
+  {% endif %}
+  
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}">Username:</label>
+      {{ form.username }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.password.id_for_label }}">Password:</label>
+      {{ form.password }}
+    </div>
+    <button class="submit-button" type="submit">Login</button>
+  </form>
+</div>
+{% endblock content %}

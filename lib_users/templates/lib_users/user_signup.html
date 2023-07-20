@@ -1,0 +1,143 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block style %}
+
+
+
+.signup-form {
+max-width: 400px;
+width: 100%;
+padding: 30px;
+border: 1px solid #ccc;
+border-radius: 10px;
+background-color: #fff;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+margin: 0 auto;
+}
+
+.signup-title {
+font-size: 24px;
+text-align: center;
+margin-bottom: 20px;
+color: #7e57c2;
+/* Cool mixed colors example: gradient background */
+background: linear-gradient(to right, #7e57c2, #1de9b6);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.form-group {
+margin-bottom: 4px;
+}
+
+.form-group label {
+display: block;
+font-weight: bold;
+margin-bottom: 0px;
+}
+
+.form-group input {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.form-group .error-message {
+color: red;
+font-size: 14px;
+margin-top: 5px;
+}
+
+.form-group .error-message::before {
+content: "⚠ ";
+}
+
+.form-group .error-message:first-letter {
+text-transform: capitalize;
+}
+
+.submit-button {
+display: block;
+width: 100%;
+padding: 10px;
+background-color: #7e57c2;
+border: none;
+border-radius: 5px;
+color: #fff;
+font-weight: bold;
+cursor: pointer;
+}
+
+.submit-button:hover {
+background-color: #1de9b6;
+}
+
+{% endblock style %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="signup-form">
+  <h2 class="signup-title">Sign Up</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+  <label for="{{ form.username.id_for_label }}">Username:</label>
+  {{ form.username }}
+  {% if form.username.errors %}
+  <p class="error-message">{{ form.username.errors|first }}</p>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+  {{ form.first_name }}
+  {% if form.first_name.errors %}
+  <p class="error-message">{{ form.first_name.errors|first }}</p>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+  {{ form.last_name }}
+  {% if form.last_name.errors %}
+  <p class="error-message">{{ form.last_name.errors|first }}</p>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.email.id_for_label }}">Email:</label>
+  {{ form.email }}
+  {% if form.email.errors %}
+  <p class="error-message">{{ form.email.errors|first }}</p>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.password1.id_for_label }}">Password:</label>
+  {{ form.password1 }}
+  {% if form.password1.errors %}
+  <p class="error-message">{{ form.password1.errors|first }}</p>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+  {{ form.password2 }}
+  {% if form.password2.errors %}
+  <p class="error-message">{{ form.password2.errors|first }}</p>
+  {% endif %}
+</div>
+
+<button class="submit-button" type="submit">Sign Up</button>
+  </form>
+</div>
+<br>
+<br>
+<br>
+
+{% endblock content %}

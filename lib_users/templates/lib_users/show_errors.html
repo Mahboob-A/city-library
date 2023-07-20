@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Error!{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Some Error Occured !!</h1>
+
+</div>
+
+<!-- if the book is alrady wishlisted by the user  -->
+{% if book_exists_already_wishlisted %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Already Wishlisted The Book - {{book_title|title}}  !!</h3>
+<br>
+<br>
+
+
+<!-- if the book is alrady borrowed by the user  -->
+{% elif book_exists_borrowed %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Already Borrowed The Book - {{book_title|title}} !!</h3>
+<br>
+<br>
+
+<!-- if the book is already borrowed and the user is trying to make wishlist -->
+{% elif book_exists_borrowed_trying_wishlist %}
+
+<br>
+<br>
+<h3 class="empty-message">As You Have Already Borrowed The Book - {{book_title|title}} - You Can Not Wishlist It !!</h3>
+<br>
+<br>
+
+
+
+<!-- if the user has exceeded the total borrowed limit of 5 books -->
+{% elif total_borrowed_books_exceeded %}
+<br>
+<br>
+<h3 class="empty-message">You Have Exceeded The Total Book Borrowing Limit Of - {{total_book_borrowing_limit}} Copies !!</h3>
+<h4 class="empty-message">If you want to borrow this book - {{book_title|title}}, then please return some of your borrowed books  !!</h4>
+<h5 class="empty-message">To return any borrowed books - <a href=" {% url 'all_borrowed_books' %} " class="btn btn-warning ">Return Book</a></h5> 
+<br>
+<br>
+{% endif %}
+
+<h4 style="color: white;">You will be redirected to Book List soon! if you are not redirected <a href="{% url 'book_list' %}">click here</a></h4>
+
+<!-- auto return to the Book List Page -->
+<script>
+
+    var bookListUrl = "{% url 'book_list' %}";
+
+{% comment %} <script src="{% static 'js/countdown.js' %}"></script> {% endcomment %}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href = bookListUrl;
+    }, 5000);
+});
+
+
+</script>
+
+
+{% endblock content %}
+

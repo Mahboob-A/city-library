@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Book List{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+
+
+
+ {% if books %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">All Available Books</h1>
+
+</div>
+
+{% include 'lib_users/iterate_books.html' %}  <!-- I have included the for loop here -->
+
+{% else %}
+    <p>No Book available</p>
+{% endif %}
+
+
+
+{% endblock content %}
+

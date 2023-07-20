@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Book Detail{% endblock title %}
+
+{% block style %}
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+            color: #127;
+            font-style: italic;
+        }
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+{% if book and book_borrow_successful %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">The {{book.title}} Is Successfully Borrowed !! </h1>
+
+</div>
+
+{% else %}
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Book Detail</h1>
+
+</div>
+
+{% endif %}
+
+
+{% if book and book_borrow_successful %}
+   
+        <hr>
+        <br>
+        <div class="book-box">
+            <div class="book-image">
+                <img src="{{ book.book_image_url }}" alt="Book Image" style="max-width: 250px;">
+            </div>
+            <div class="book-details">
+                <br>
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre.name|title }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <div class="book-actions">
+                    <div class="button-group">
+                        <a href=" {% url 'check_book_return_date' book.id %} " class="btn btn-info ">Check Due Date</a> &nbsp;&nbsp;&nbsp;
+                        <a href=" {% url 'return_book' book.id %} " class="btn btn-warning">Return Book</a> &nbsp;&nbsp;&nbsp;  
+                
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+{% elif book and book_wishlist %}
+
+        <hr>
+        <br>
+        <div class="book-box">
+            <div class="book-image">
+                <img src="{{ book.book_image_url }}" alt="Book Image" style="max-width: 250px;">
+            </div>
+            <div class="book-details">
+                <br>
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre.name|title }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <div class="book-actions">
+                    <div class="button-group">
+                        <a href=" {% url 'remove_from_wishlist' book.id %} " class="btn btn-danger">Remove</a> &nbsp;&nbsp;&nbsp;  
+                
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+{% endif %}
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Return Book{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+<div>
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Book Return</h1>
+
+</div>
+
+
+ {% if is_book_return_success %}
+
+
+
+<div>
+  <br>
+<br>
+<h3 class="empty-message">The Book - {{book_title}} Is Successfully Returned !! </h3>
+<div>
+
+
+  <h5 style="color: white;">You will be redirected to your borrowed books soon! If not redirected - <a href="{% url 'all_borrowed_books' %}">click here</a></h5>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'all_borrowed_books' %}";
+    }, 4000);
+});
+</script>
+
+{% endif %}
+
+
+
+{% if is_book_return_failed %}
+
+
+<br>
+<br>
+<h2 class="empty-message">Your Book Return Date Is Overdue For - {{overdue_days}} Days </h2>
+<h3 class="empty-message">You Have To Pay Rs. {{fine_amount}} To Return The Book </h3>
+<h4 class="empty-message">IMPORTANT : For Your Knowledge, You Are Free To Hold Any Book For 15 Days From The Time Of Borrowing The Book 
+  <br>
+  After That, You Will Be Charged Rs. 5 For Each Overdue Day.
+</h4>
+<br>
+<br>
+
+<h5 style="color: white;">You will be redirected to Pay Overdue Fine. if you are not redirected - <a href="{% url 'pay_overdue_fine' %}">click here</a></h5>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'pay_overdue_fine' %}";
+    }, 7000);
+});
+</script>
+
+
+{% endif %}
+
+
+
+{% endblock content %}
+

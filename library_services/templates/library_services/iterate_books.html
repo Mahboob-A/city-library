@@ -1,0 +1,34 @@
+
+
+{% for book in books %}
+   
+        <hr>
+        <br>
+        <div class="book-box">
+            <div class="book-image">
+                <img src="{{ book.book_image_url }}" alt="Book Image" style="max-width: 250px;">
+            </div>
+            <div class="book-details">
+                <br>
+                <h2>{{ book.title|title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre.name }}</p>
+                <p><strong>Available Copy:</strong> {{ book.total_copy }}</p>
+                <p><strong>Description:</strong> {{ book.description }}</p>
+                <div class="book-actions">
+                    <div class="button-group">
+                        {% if book.total_copy %}
+                        <a href=" {% url 'borrow_book' book.id %} " class="btn btn-primary ">Borrow Book</a> &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 
+                        <a href=" {% url 'make_wishlist'  book.id %}" class="btn btn-info">Wishlist</a>
+                        {% else %}
+                        <button type="button" class="btn btn-dark">Currenly Unavailable</button>   &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 
+                        <a href="{% url 'book_request_book_list' book.id %}" class="btn btn-info">Request Book</a>  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+    {% endfor %}

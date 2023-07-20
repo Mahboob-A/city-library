@@ -1,0 +1,109 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Fine Payment{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+{% if fine_payment_successful %}
+
+<div>
+ <br>
+<hr>
+ <div class="container">
+  <h1 class="text-center gradient-text">Fine Payment Successful !!</h1>
+</div>
+
+
+<div>
+<br>
+<br>
+<h3 class="empty-message">Your Fine Amount {{fine_amount}} Is Successfully Paid !! </h3>
+<h4 class="empty-message">You Can Now Return The Book - {{book_title}} From Your Borrowed Books !! </h4>
+<div>
+  <h5 style="color: white;">You will be redirected to your borrowed books soon! If not redirected - <a href="{% url 'all_borrowed_books' %}">click here</a></h5>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'all_borrowed_books' %}";
+    }, 5000);
+});
+</script>
+
+{% endif %}
+
+
+<!-- If fine payment is unsuccessfull | redirect to wallet to add money-->
+{% if fine_payment_unsuccessful %}
+<div>
+ <br>
+<hr>
+ <div class="container">
+  <h1 class="text-center gradient-text">Fine Payment Unsuccessfull !!</h1>
+</div>
+
+<div>
+<br>
+<br>
+<h3 class="empty-message">Your Fine Amount Rs. {{fine_amount}} Payment Is Unsuccessfull !! </h3>
+<h4 class="empty-message">You Have Insufficient Wallet Balance Of Rs. {{user_wallet_balance}}</h4>
+<h4 class="empty-message">Please Add At Least Rs. {{required_balance}} To Your Wallet To Continue Payment</h4>
+<div>
+
+  <h5 style="color: white;">You will be redirected to your wallet soon! If not redirected - <a href="{% url 'wallet' %}">click here</a></h5>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'wallet' %}";
+    }, 7000);
+});
+</script>
+
+{% endif %}
+
+
+{% endblock content %}
+

@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Book Request Message{% endblock title %}
+
+{% block style %}
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  letter-spacing: 5px !important;
+  background:  linear-gradient(to right, rgba(255, 255, 255, 0.8), #f44336);
+  background-clip: text;
+  color: transparent;
+}
+
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+{% endblock style %}
+
+
+{% block content %}
+
+{% if  book_request_book_list_failed or book_request_form_failed %}
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Some Error Occured !!</h1>
+
+</div>
+{% else %}
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Book Request Successfully Placed !!</h1>
+
+</div>
+{% endif %}
+
+<!-- for the request placed in the book list  -->
+{% if book_request_book_list_failed %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Already Placed A Request For The Book - {{book_title}} !!</h3>
+
+{% elif book_request_book_list_success %}
+<br>
+<br>
+<h3 class="empty-message">Your Book Request For The Book - {{book_title}} Is Successful !!</h3>
+
+{% endif %}
+
+<!-- for the request placed by the form  -->
+{% if book_request_form_failed %}
+
+<br>
+<br>
+<h3 class="empty-message">You Have Already Placed A Request For The Book - {{book_title}} !!</h3>
+
+{% elif book_request_form_success %}
+
+<br>
+<br>
+<h3 class="empty-message">Your Book Request For The Book - {{book_title}} Is Successful !!</h3>
+
+{% endif %}
+
+
+
+
+<h4 style="color: white;">You will be redirected to All Books soon! if you are not redirected <a href="{% url 'book_list' %}">click here</a></h4>
+
+<!-- auto return to the Book List Page -->
+<script>
+    var bookListUrl = "{% url 'book_list' %}";
+</script>
+<script src="{% static 'js/countdown_ls.js' %}"></script>
+
+{% endblock content %}
+
+
+
+
+

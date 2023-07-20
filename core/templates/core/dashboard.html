@@ -1,0 +1,44 @@
+
+{% extends 'core/base.html' %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block style %}
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  letter-spacing: 5px !important;
+  background: radial-gradient(circle at top left, #42a5f5 0%, #ff9800 30%, #4caf50 60%, #f44336 100%);
+
+  background-clip: text;
+  color: transparent;
+}
+
+
+{% endblock style %}
+
+
+
+
+
+{% block content %}
+
+ <br>
+<hr>
+<br><br>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Welcome Mr. {{request.user.get_full_name|title}} To Dashboard</h1>
+
+</div>
+
+
+
+{% endblock content %}
+
+

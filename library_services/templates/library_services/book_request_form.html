@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}Book Request{% endblock title %}
+
+{% block style %}
+
+.book-request-form {
+    max-width: 400px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .invalid-feedback {
+    color: red;
+  }
+
+{% endblock style %}
+
+
+{% block content %}
+
+
+<br>
+<br>
+<br>
+<br>
+<form method="POST" class="book-request-form">
+  {% csrf_token %}
+  
+  <div class="form-group">
+    <label for="{{ form.title.id_for_label }}">Book Name</label>
+    <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" placeholder="Enter Book Name" required>
+    {% if form.title.errors %}
+    <div class="invalid-feedback">
+      {{ form.title.errors|join:", " }}
+    </div>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    <label for="{{ form.author.id_for_label }}">Author Name</label>
+    <input type="text" class="form-control" id="{{ form.author.id_for_label }}" name="{{ form.author.html_name }}" placeholder="Enter Author Name" required>
+    {% if form.author.errors %}
+    <div class="invalid-feedback">
+      {{ form.author.errors|join:", " }}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.descripton.id_for_label }}">Descripton</label>
+    <input type="text" class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.html_name }}" placeholder="Description (optional)" >
+    {% if form.description.errors %}
+    <div class="invalid-feedback">
+      {{ form.description.errors|join:", " }}
+    </div>
+    {% endif %}
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+{% endblock content %}
+
+
+
+
+

@@ -1,0 +1,122 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Pay Fine{% endblock title %}
+
+{% block style %}
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+    color: #127;
+    font-style: italic;
+}
+
+
+body {
+     
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+    
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+}
+
+.current-balance-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.fine-amount {
+    margin-top: 20px;
+    text-align: right;
+    font-weight: bold;
+}
+
+{% endblock style %}
+
+
+{% block content %}
+<br>
+<hr>
+<div class="container">
+    <h1 class="text-center gradient-text">Pay Fine</h1>
+</div>
+
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+            {{ form.amount }}
+            <div class="error-message">
+                {% if form.amount.errors %}
+                    {{ form.amount.errors|join:", " }}
+                {% endif %}
+            </div>
+        </div>
+        <button class="form-button">Pay</button>
+    </form>
+
+    <div class="current-balance-container">
+        <div>Current Balance: {{ curr_balance }}</div>
+        <div class="fine-amount">Fine Amount: {{ fine_amount }}</div>
+    </div>
+</div>
+
+{% endblock content %}

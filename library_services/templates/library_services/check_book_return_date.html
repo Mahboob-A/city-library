@@ -1,0 +1,119 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Return Due Date{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+<div>
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Return Due Date</h1>
+
+</div>
+
+
+<!-- If return date is ontime -->
+ {% if on_time %}
+
+<div>
+  <br>
+<br>
+<h2 class="empty-message">You Are On Time To Return The Book - {{book_title}} </h2>
+<h3 class="empty-message">Remaining Days From Today : {{remaining_days}} Days.</h3>
+<h3 class="empty-message">Current Date : {{current_date}}</h3>
+<h3 class="empty-message">Due Date : {{provisional_return_date}}</h3>
+
+<div>
+
+
+  <h5 style="color: white;">You will be returned to your borrowed books soon! If not redirected - <a href="{% url 'all_borrowed_books' %}">click here</a></h5>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'all_borrowed_books' %}";
+    }, 7000);
+});
+</script>
+
+{% endif %}
+
+
+<!-- If return date is exceeded -->
+{% if not on_time %}
+
+
+<div>
+  <br>
+<br>
+<h2 class="empty-message">You Exceeded The Return Date For The Book - {{book_title}} </h2>
+<h3 class="empty-message">Overdue Days From {{provisional_return_date}} Till Today : {{remaining_days}} Days.</h3>
+<h3 class="empty-message">Current Date : {{current_date}}</h3>
+<h3 class="empty-message">Past Due Date : {{provisional_return_date}}</h3>
+<h4 class="empty-message">You Have To Pay Rs. {% widthratio remaining_days 1 5 %} As Fine To Return The Book For {{remaining_days}} Days Delay</h4>
+<div>
+
+<h5 style="color: white;">You will be returned to your borrowed books soon! If not redirected - <a href="{% url 'all_borrowed_books' %}">click here</a></h5>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function() {
+        window.location.href =" {% url 'all_borrowed_books' %}";
+    }, 7000);
+});
+</script>
+
+
+{% endif %}
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Search Book Result{% endblock title %}
+
+
+{% block style %}
+
+.book-description {
+  position: relative;
+}
+
+.preview {
+  margin-bottom: 10px;
+}
+
+
+.container {
+  {% comment %} display: flex; {% endcomment %}
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+                color: #127;
+                font-style: italic;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+        }
+
+
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+
+
+
+ {% if books %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Search Book Result</h1>
+
+</div>
+
+{% include 'library_services/iterate_books.html' %}  <!-- I have included the for loop here -->
+
+{% else %}
+
+ <br>
+<hr>
+ <div class="container">
+
+  <h1 class="text-center gradient-text">Search Book Result</h1>
+
+</div>
+  <br>
+<br>
+<h3 class="empty-message">No Books Available For This Information - {{query}} </h3>
+{% endif %}
+
+
+
+{% endblock content %}
+

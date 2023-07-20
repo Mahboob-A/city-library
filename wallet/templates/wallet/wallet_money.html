@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add Money{% endblock title %}
+
+{% block style %}
+.container {
+  align-items: center;
+  justify-content: center;
+  height: 10vh; 
+}
+
+.gradient-text {
+  background-image:radial-gradient(#e66465, #9198e5, yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-message {
+  color: #127;
+  font-style: italic;
+}
+
+body {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.form-container {
+  width: 300px;
+  text-align: center;
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-field .error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+}
+
+.current-balance {
+  margin-top: 20px;
+  font-weight: bold;
+}
+{% endblock style %}
+
+{% block content %}
+<br>
+<hr>
+<div class="container">
+  <h1 class="text-center gradient-text">Mr. {{ request.user.get_full_name|title }}'s Wallet</h1>
+</div>
+
+<div class="form-container">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-field">
+      <label for="{{ form.balance.id_for_label }}">{{ form.balance.label }}</label>
+      {{ form.balance }}
+      <div class="error-message">
+        {% if form.balance.errors %}
+          {{ form.balance.errors|join:", " }}
+        {% endif %}
+      </div>
+    </div>
+    <button class="form-button">Add Money</button>
+  </form>
+  <div class="current-balance">
+    Current Balance: {{ curr_balance }}
+  </div>
+</div>
+
+{% endblock content %}
