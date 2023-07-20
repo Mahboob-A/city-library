@@ -34,5 +34,5 @@ To see the live project - ![click here](http://djangolibrarymanagement.pythonany
 
 ## Feedback
 
-If you have any feedback or suggestions, Please [email me](mailto:iammahboob.a@gmail.com?subject=Questions%20about%20your%20project) here.
+If you have any feedback or suggestions, Please [email me](mailto:iammahboob.a@gmail.com?subject=Questions%20about%20your%20project&body=Hello%2C%20I%20have%20some%20questions%20about%20your%20project) here.
 
