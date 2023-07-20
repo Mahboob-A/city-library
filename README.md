@@ -30,9 +30,9 @@ This is something you will see in  the project
 
 
 ## Live Project 
-To See the live project : ![click here](http://djangolibrarymanagement.pythonanywhere.com/)
+To see the live project - ![click here](http://djangolibrarymanagement.pythonanywhere.com/)
 
 ## Feedback
 
-If you have any feedback or suggestions, Please [Email me](mailto:iammahboob.a@gmail.com) 
+If you have any feedback or suggestions, Please [email me](mailto:iammahboob.a@gmail.com) here.
 
