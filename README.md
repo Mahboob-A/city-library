@@ -24,7 +24,7 @@ catalogue and Borrow / Return Books.
 
 ## Sneak Peek
 
-This is something you will see in  the project
+This is something you will see in  the project <br> <br>
 ![djanog lib manage system](https://github.com/Mahboob-A/library-management-system/assets/109282492/cfa8a3e2-6da1-4a13-aa77-95491abb915a)
 ![](https://github.com/Mahboob-A/library-management-system/assets/109282492/b481aec9-48a2-4a08-9931-67e2c4798746)
 
