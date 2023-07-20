@@ -30,7 +30,7 @@ This is something you will see in  the project
 
 
 ## Live Project 
-To see the live project - ![click here](http://djangolibrarymanagement.pythonanywhere.com/)
+To see the live project - [click here](http://djangolibrarymanagement.pythonanywhere.com/)
 
 ## Feedback
 
