@@ -9,10 +9,6 @@ from django.contrib import messages
 
 
 
-
-##################### BOOK RELATED FUNCTION ##########################
-
-
 ##################### AUTH FUNCTIONS ################################
 
 def user_login_2(request): 
