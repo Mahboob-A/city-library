@@ -17,7 +17,9 @@ Including another URLconf
 '''
 Module 18 - Library Management Project Assignment.
 Mod date : 180623
-Mod begin date : 05023, Wednesday, 07.00 am 
+Mod begin date : 050723, Wednesday, 07.00 am
+assignment being date : 160723, Sunday, 06.00 am 
+assignment done date : 190723, Wednesday, 10.00 pm  
 """
 
 from django.contrib import admin

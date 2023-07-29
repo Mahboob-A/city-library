@@ -41,7 +41,6 @@ class UserLoginForm(AuthenticationForm):
                 
                 
                 
-# no use of this model form . To use a form as singup we must use usercreation form or to use login functionality, we must use authentication form 
 
 # class UserModelForm(forms.ModelForm):   
 #         class Meta:
