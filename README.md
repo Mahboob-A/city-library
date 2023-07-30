@@ -13,6 +13,7 @@ catalogue and Borrow / Return Books.
 
 ## Features
 
+- Secure Authentication 
 - See All Books 
 - Borrow Book
 - Return Book 
